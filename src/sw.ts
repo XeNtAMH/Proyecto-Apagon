@@ -2,7 +2,7 @@
 import { ExpirationPlugin } from 'workbox-expiration';
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import {
   isOutageNotificationPayload,
   type OutageNotificationPayload,
@@ -47,6 +47,24 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: 2,
         maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ],
+  }),
+);
+
+// Los puntos de circuitos se descargan al abrir el mapa o pulsar «Usar mi
+// ubicación» y quedan en caché para siguientes usos sin conexión. No se
+// precachean porque pesan ~800 kB.
+registerRoute(
+  ({ url }) =>
+    url.origin === self.location.origin &&
+    url.pathname.endsWith('/geo/circuits-points.json'),
+  new CacheFirst({
+    cacheName: 'geo-circuit-points',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 1,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
   }),

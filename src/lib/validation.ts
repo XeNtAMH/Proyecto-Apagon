@@ -163,6 +163,13 @@ function parseDevice(value: unknown): Device | null {
       ? value.efficiency
       : undefined;
 
+  const presetId =
+    typeof value.presetId === 'string' &&
+    value.presetId.trim().length > 0 &&
+    value.presetId.length <= 120
+      ? value.presetId.trim()
+      : undefined;
+
   return {
     id,
     name,
@@ -173,6 +180,7 @@ function parseDevice(value: unknown): Device | null {
       rawEfficiency === undefined
         ? undefined
         : Math.min(1, Math.max(0, rawEfficiency)),
+    presetId,
   };
 }
 
@@ -210,12 +218,24 @@ export function parseUserSettings(
         ? null
         : fallback.activeDeviceId;
 
+  const circuitPending =
+    typeof value.circuitPending === 'boolean'
+      ? value.circuitPending
+      : fallback.circuitPending;
+
+  const address =
+    typeof value.address === 'string'
+      ? (cleanText(value.address, 160) ?? undefined)
+      : fallback.address;
+
   return {
     selectedCircuitId,
     notificationLeadMinutes: lead,
     theme,
     notificationsEnabled,
     activeDeviceId,
+    circuitPending,
+    address,
   };
 }
 

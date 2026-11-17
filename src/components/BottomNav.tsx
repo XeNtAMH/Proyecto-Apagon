@@ -13,6 +13,7 @@ const NAV_ITEMS: Array<{
 }> = [
   { route: 'home', label: 'Inicio', icon: 'home' },
   { route: 'circuit', label: 'Circuito', icon: 'calendar' },
+  { route: 'mi-circuito', label: 'Mi zona', icon: 'pin' },
   { route: 'devices', label: 'Equipos', icon: 'battery' },
   { route: 'settings', label: 'Ajustes', icon: 'settings' },
 ];

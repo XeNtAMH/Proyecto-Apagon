@@ -10,7 +10,10 @@ datos personales se guardan en el navegador.
 - Estado actual **CON LUZ / SIN LUZ** y cuenta regresiva en tiempo real.
 - Próximo apagón y las siguientes ventanas de carga.
 - Varios circuitos con horario semanal o con fechas específicas.
-- Cálculo de carga para power banks, UPS, laptops y otros equipos.
+- Asistente «Mi circuito» por provincia, municipio y zona, con geolocalización
+  opcional y dirección de referencia guardada solo en el dispositivo.
+- Catálogo de dispositivos por categoría y modelo, con cálculo de carga para
+  power banks, UPS, laptops y otros equipos.
 - Avisos locales configurables antes del apagón.
 - Exportación e importación de todos los datos en JSON.
 - Temas claro, oscuro y automático.
@@ -23,7 +26,8 @@ datos personales se guardan en el navegador.
 - Vite 7.
 - Zustand para el estado global.
 - IndexedDB mediante `idb`.
-- Vitest para las pruebas del motor de horarios.
+- Vitest para el motor de horarios, el catálogo, la búsqueda Haversine y el
+  índice geográfico.
 - `vite-plugin-pwa` con `injectManifest` y Workbox.
 - CSS puro, sin framework de estilos ni librería de iconos.
 
@@ -149,6 +153,53 @@ por el usuario sí se pueden eliminar.
 - Los ajustes se guardan en la misma base de datos; no se usa `localStorage`
   para los datos de la app.
 
+## Dispositivos
+
+Añadir un dispositivo son dos pasos: primero se elige la categoría y después el
+modelo, con buscador y una opción «No sé» por categoría.
+
+- El catálogo (`src/data/devicePresets.ts`) se carga bajo demanda en un chunk
+  aparte y no entra en el JS inicial.
+- Al guardar se copian capacidad, potencia y eficiencia al dispositivo, junto
+  con `presetId` como metadato de origen. Cambiar el catálogo no altera equipos
+  ya guardados.
+- «No sé» usa valores conservadores y la app avisa de que son estimados.
+- Los ajustes técnicos (capacidad en mAh/Wh, cargador y eficiencia) están en
+  «Ajustes avanzados», cerrado por defecto tras añadir un modelo.
+- iPhone 14 se puede añadir en tres toques: Añadir dispositivo → Teléfono →
+  iPhone 14.
+
+## Mi circuito y ubicación
+
+La ruta `#/mi-circuito` ayuda a identificar el circuito sin saber su código.
+Hay dos formas de elegir y la selección se guarda en IndexedDB:
+
+- **Elegir por lista**: provincia → municipio → zona. Los datos salen de
+  `public/geo/circuits-index.json`, que incluye las 15 provincias y la Isla de
+  la Juventud. Los municipios y zonas se derivan de los campos opcionales
+  `province` y `municipality` de `schedules.json`; si faltan, se agrupan bajo
+  «Sin provincia» / «Sin municipio». No se inventan ubicaciones.
+- **Buscar en el mapa**: Leaflet se importa dinámicamente solo al abrir esta
+  opción (`import('leaflet')`) y no entra en el precache. Al tocar el mapa o
+  pulsar «Usar mi ubicación actual» se busca el circuito más cercano.
+- La búsqueda usa `src/lib/circuitLookup.ts`: descarga perezosa de
+  `public/geo/circuits-points.json` (~6.855 puntos), caché en memoria y la
+  fórmula de Haversine escrita en TypeScript, sin dependencias externas. El
+  fetch solo ocurre al abrir el mapa, nunca en el arranque de la app.
+- Si el punto más cercano está a 5 km o menos, se muestra «Tu circuito es:
+  [nombre] (Municipio: [municipio])» y el botón «Guardar mi circuito». Si está
+  más lejos, se pide usar la lista manual.
+- Al guardar se persiste el `circuitId` en IndexedDB (ajustes) y se vuelve a
+  Inicio. Si los horarios oficiales todavía no incluyen ese circuito, se crea
+  un registro local sin ventanas de luz para conservar la elección; el usuario
+  puede completar el horario desde la pantalla del circuito.
+- El JSON de puntos no se precachea: el Service Worker lo guarda con
+  `CacheFirst` la primera vez que se usa, de modo que las siguientes búsquedas
+  funcionan sin conexión.
+- La dirección es opcional, se guarda en IndexedDB y no se usa para calcular la
+  zona. «Buscar mi dirección» es una acción aparte con consentimiento explícito
+  para consultar Nominatim; si falla, el flujo principal no se ve afectado.
+
 ## Respaldo
 
 Ajustes > Respaldo de datos permite exportar un JSON con circuitos,
@@ -173,14 +224,16 @@ pestaña abierta. Es una implementación local **best-effort**:
 ```text
 public/
   favicon.svg
+  geo/                   Índice de zonas y GeoJSON opcionales por provincia
   icons/                 Iconos normales y maskable de la PWA
   schedules.json         Datos oficiales de ejemplo
+scripts/                 Generador del índice geográfico
 src/
   components/            Iconos SVG y navegación inferior
-  data/                  Respaldo local de horarios
+  data/                  Catálogo de dispositivos y respaldo de horarios
   hooks/                 Tema, ruta, conexión, instalación y avisos
-  lib/                   Horarios, fechas, IDB, validación, API y backups
-  pages/                 Inicio, Circuito, Dispositivos y Ajustes
+  lib/                   Horarios, fechas, IDB, validación, API, geo y backups
+  pages/                 Inicio, Circuito, Mi circuito, Dispositivos y Ajustes
   store/                 Estado global con Zustand
   App.tsx                Shell, hidratación y navegación
   main.tsx               Montaje de React y registro del Service Worker
@@ -197,10 +250,20 @@ tsconfig.sw.json
 ## Verificación realizada
 
 - `npm run typecheck`: correcto para la app y el Service Worker.
-- `npm test`: 25/25 tests.
+- `npm test`: 59/59 tests (25 del motor de horarios, 7 del catálogo, 11 del
+  índice geográfico, 10 de geometría y 6 del estado de pestañas).
 - `npm run build`: correcto.
-- JavaScript inicial del primer build: 205.96 kB minificado → **64.80 kB
-  gzip**, por debajo del límite de 200 kB.
+- JavaScript inicial: 193.19 kB minificado → **62.53 kB gzip**, por debajo del
+  límite de 90 kB. Leaflet no forma parte del bundle inicial.
+- Chunks bajo demanda: Leaflet 149.90 kB → **43.48 kB gzip** (CSS 6.46 kB gzip),
+  Mi circuito 4.15 kB gzip, Dispositivos 4.26 kB gzip, catálogo 2.02 kB gzip,
+  Circuito 3.42 kB gzip y Ajustes 3.48 kB gzip. Leaflet y su CSS quedan fuera
+  del precache; el resto sí se precachea (30 entradas, 409.95 KiB).
+- Índice geográfico: 17 entradas (16 provincias + «Sin provincia»), 3 zonas, sin
+  IDs duplicados. Pesa 2.31 kB (557 B gzip), muy por debajo del límite de 40 kB.
+- `public/geo/circuits-points.json` contiene 6.855 puntos (~792 kB). No entra en
+  el precache: se descarga al abrir el mapa y el Service Worker lo guarda con
+  `CacheFirst` para las siguientes búsquedas sin conexión.
 - Recarga offline probada con Service Worker controlando la página: shell,
   circuitos, navegación y banner de conexión funcionan sin red.
 - Sin desbordamiento horizontal comprobado a 320 px en Inicio, Circuito y
@@ -215,7 +278,8 @@ revisión.
 
 Es una aplicación estática. Sirve `dist/` en cualquier hosting con HTTPS (el
 Service Worker requiere HTTPS o `localhost`). No necesita rewrites de servidor
-porque las rutas usan hash (`#/circuito`, `#/dispositivos`, `#/ajustes`).
+porque las rutas usan hash (`#/circuito`, `#/mi-circuito`, `#/dispositivos`,
+`#/ajustes`).
 
 En Netlify o Vercel basta con:
 

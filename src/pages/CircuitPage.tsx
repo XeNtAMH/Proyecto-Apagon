@@ -393,6 +393,17 @@ export function CircuitPage() {
         </p>
       </header>
 
+      <a className="notice-card" href="#/mi-circuito">
+        <span className="notice-icon">
+          <Icon name="pin" size={22} />
+        </span>
+        <span className="notice-copy">
+          <strong>¿No sabes cuál es tu circuito?</strong>
+          <span>Búscalo por provincia, municipio y zona.</span>
+        </span>
+        <Icon name="arrow-right" size={20} />
+      </a>
+
       {!selectedCircuit ? (
         <section className="empty-card">
           <span className="empty-icon">

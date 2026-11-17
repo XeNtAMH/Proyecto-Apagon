@@ -1,6 +1,6 @@
 # CONTINUAR — Rotación de Circuitos
 
-Fecha de corte: 2026-11-10  
+Fecha de corte: 2026-11-15  
 Estado: **entrega funcional y verificada**. La PWA compila, pasa los tests y
 abre sin conexión después de una primera carga.
 
@@ -13,6 +13,7 @@ Este archivo es un traspaso breve. La documentación principal está en
 npm install
 npm run typecheck
 npm test
+npm run geo:index
 npm run build
 npm run preview
 ```
@@ -23,8 +24,17 @@ Service Worker está desactivado en desarrollo a propósito.
 ## Verificado
 
 - `npm run typecheck`: app y Service Worker sin errores.
-- `npm test`: 25/25 tests.
-- `npm run build`: correcto; JS inicial 64.80 kB gzip.
+- `npm test`: 53/53 tests (25 del motor de horarios, 7 del catálogo, 9 de
+  búsqueda por Haversine, 6 del índice geográfico y 6 del estado de pestañas).
+- `npm run build`: correcto; JS inicial 62.53 kB gzip (límite 90 kB).
+- Chunks bajo demanda verificados: Dispositivos, Mi circuito, catálogo de
+  dispositivos, Circuito y Ajustes. La PWA los precachea, así que siguen
+  disponibles offline. Leaflet (43.48 kB gzip + 6.46 kB CSS) queda fuera del
+  bundle inicial y del precache: solo se descarga al abrir «Buscar en el mapa».
+- `npm run geo:index`: genera las 16 provincias (15 + Isla de la Juventud) y
+  3 zonas a partir de `schedules.json`. Precache: 30 entradas. Los 6.855 puntos
+  de `circuits-points.json` no se precachean; el Service Worker los guarda en
+  `CacheFirst` al abrir el mapa.
 - Prueba real con Service Worker controlando la página:
   - recarga offline del shell y de las rutas;
   - IndexedDB con los 3 circuitos;
@@ -46,6 +56,15 @@ versión.
 - Estado global y sincronización: `src/store/useAppStore.ts`.
 - Horarios oficiales: `public/schedules.json` y, para el primer arranque
   offline, `src/data/fallbackSchedules.ts`.
+- Catálogo de dispositivos y flujo de selección por categoría/modelo:
+  `src/data/devicePresets.ts` (chunk lazy) y `src/pages/DevicesPage.tsx`.
+- Mi circuito: `src/pages/MiCircuito.tsx` (lazy), `src/lib/geo.ts` (lista
+  manual), `src/lib/circuitLookup.ts` (Haversine y puntos cercanos),
+  `src/lib/miCircuitoState.ts` y sus tests. Leaflet se importa dinámicamente
+  dentro del efecto de la pestaña del mapa.
+- Índice geográfico: `scripts/build-geo-index.mjs` genera
+  `public/geo/circuits-index.json` y `public/geo/zones/manifest.json`. Los
+  GeoJSON opcionales van en `public/geo/zones/<provincia>.geojson`.
 - Shell y navegación: `src/App.tsx`.
 - Pantallas: `src/pages/`.
 - Estilos y temas: `src/styles.css`.
@@ -65,8 +84,15 @@ versión.
    de esperar red.
 7. Los avisos locales son best-effort, no push real. No prometer entrega exacta
    con la aplicación cerrada.
-8. Mantener el JS inicial por debajo de 200 kB gzip. El presupuesto actual es
-   amplio (64.80 kB gzip), pero no añadir librerías grandes sin medir.
+8. Mantener el JS inicial por debajo de 90 kB gzip. Las páginas secundarias
+   (incluida Mi circuito) van con `React.lazy`, el catálogo de dispositivos con
+   `import()` dinámico y el índice geográfico es un JSON de datos, no código.
+9. El índice geográfico incluye las 16 provincias reales, pero municipios y
+   zonas de la lista manual se derivan solo de `schedules.json`: no inventar
+   ubicaciones. Si faltan, se usa «Sin provincia» / «Sin municipio». La búsqueda
+   del mapa usa `public/geo/circuits-points.json` y Haversine con un máximo de
+   5 km; ese JSON y Leaflet se descargan solo al abrir el mapa, nunca en el
+   arranque.
 
 ## Pendientes manuales opcionales
 
@@ -85,3 +111,11 @@ navegador real:
 - SWR puede mostrar una actualización de horarios una carga tarde.
 - La estimación de carga parte de batería vacía y es orientativa.
 - No hay cuentas ni sincronización entre dispositivos.
+- Los horarios actuales no incluyen provincia ni municipio, así que los 3
+  circuitos se agrupan bajo «Sin provincia» / «Sin municipio». Las 16
+  provincias existen en el índice, pero aún no tienen municipios ni zonas.
+- Los circuitos encontrados por GPS pueden no tener horario en
+  `schedules.json`; en ese caso se guarda un registro local sin ventanas de luz
+  hasta que se publique su horario o el usuario lo complete a mano.
+- La geolocalización requiere HTTPS (o localhost) y permiso del navegador; los
+  errores se explican en lenguaje llano.

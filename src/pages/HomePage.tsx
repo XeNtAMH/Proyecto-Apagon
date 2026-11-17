@@ -134,6 +134,19 @@ export function HomePage() {
         </a>
       </header>
 
+      {settings.circuitPending && (
+        <a className="notice-card notice-warning" href="#/mi-circuito">
+          <span className="notice-icon">
+            <Icon name="pin" size={22} />
+          </span>
+          <span className="notice-copy">
+            <strong>Confirma tu circuito</strong>
+            <span>Elegiste «No sé». Búscalo por tu zona en un minuto.</span>
+          </span>
+          <Icon name="arrow-right" size={20} />
+        </a>
+      )}
+
       <section
         className={`status-card status-${status}`}
         role="status"
@@ -144,7 +157,7 @@ export function HomePage() {
         </span>
         <div className="status-copy">
           <p className="status-label">
-            {status === 'power' ? 'CON LUZ' : 'APAGÓN'}
+            {status === 'power' ? 'CON LUZ' : 'SIN LUZ'}
           </p>
           <p className="status-description">
             {status === 'power'

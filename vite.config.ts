@@ -54,7 +54,19 @@ export default defineConfig({
         ],
       },
       injectManifest: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest}'],
+        globPatterns: [
+          '**/*.{js,css,html,svg,png,ico,webmanifest}',
+          'geo/**/*.json',
+        ],
+        // Leaflet se descarga solo al abrir «Ver en mapa». No debe entrar en
+        // el precache ni en la instalación de la PWA.
+        globIgnores: [
+          '**/leaflet-*.js',
+          '**/leaflet-*.css',
+          // Los 6855 puntos se descargan solo al abrir el mapa; no deben
+          // entrar en el precache ni retrasar la instalación de la PWA.
+          '**/geo/circuits-points.json',
+        ],
       },
       devOptions: {
         enabled: false,

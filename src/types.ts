@@ -39,6 +39,8 @@ export interface Circuit {
   /** Metadatos locales: distinguen datos oficiales de ediciones del usuario. */
   source?: CircuitSource;
   updatedAt?: string;
+  /** Municipio del circuito, si se conoce (por ejemplo, al buscarlo en el mapa). */
+  municipality?: string;
 }
 
 export interface Device {
@@ -49,6 +51,11 @@ export interface Device {
   chargerWatts: number;
   /** Rendimiento de carga, entre 0 y 1. Por defecto 0.85. */
   efficiency?: number;
+  /**
+   * Preset del catálogo del que se copiaron los valores. Es solo un metadato
+   * de origen: los cálculos usan siempre los valores guardados en el Device.
+   */
+  presetId?: string;
 }
 
 export interface ChargeWindow {
@@ -66,6 +73,16 @@ export interface UserSettings {
   theme: Theme;
   notificationsEnabled: boolean;
   activeDeviceId: string | null;
+  /**
+   * true cuando el usuario eligió «No sé cuál es mi circuito». La app sigue
+   * usando el circuito activo, pero recuerda que está sin confirmar.
+   */
+  circuitPending: boolean;
+  /**
+   * Dirección de referencia escrita por el usuario. Solo se guarda en
+   * IndexedDB: nunca se geocodifica ni se envía a internet.
+   */
+  address?: string;
 }
 
 export type PowerStatus = 'power' | 'outage';
@@ -76,4 +93,5 @@ export const DEFAULT_USER_SETTINGS: UserSettings = {
   theme: 'system',
   notificationsEnabled: false,
   activeDeviceId: null,
+  circuitPending: false,
 };

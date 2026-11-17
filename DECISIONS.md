@@ -163,8 +163,9 @@ retroactivos si el momento programado ya pasó.
 **Decisión:** se usa un router propio con `location.hash`, iconos SVG inline y
 CSS puro. No se instalan React Router, Tailwind ni una librería de iconos.
 
-**Motivo:** mantener el JavaScript inicial por debajo de 200 kB gzip y permitir
-despliegue estático sin rewrites.
+**Motivo:** reducir el peso del bundle inicial y permitir despliegue estático
+sin rewrites. Las pantallas secundarias se cargan con `React.lazy`; Inicio queda
+en el chunk inicial para pintar de inmediato.
 
 **Consecuencia:** las URLs tienen la forma `#/dispositivos`; los enlaces
 profundos funcionan sin configuración especial del servidor.
@@ -193,6 +194,45 @@ cambiar la UI.
 
 **Consecuencia:** los cambios en la semántica de horarios deben actualizar los
 tests y este documento.
+
+## 18. Dispositivos por catálogo y selección en dos pasos
+
+**Decisión:** en lugar de teclear los datos técnicos desde cero, se elige
+categoría y modelo. Los presets viven en `src/data/devicePresets.ts`, que se
+carga con `import()` dinámico y nunca entra en el JS inicial.
+
+**Motivo:** la mayoría de usuarios no conoce la capacidad en Wh ni la potencia
+de entrada de su equipo. Un catálogo reduce errores, permite añadir un iPhone 14
+en tres toques y mantiene la app usable sin conexión.
+
+**Consecuencia:** al guardar se copian `batteryWh`, `chargeWatts` y `efficiency`
+al `Device`, y se conserva `presetId` solo como metadato de origen. Actualizar el
+catálogo no modifica dispositivos ya guardados. Cada categoría incluye un preset
+«No sé» con valores conservadores que la interfaz marca como estimados. Los
+ajustes técnicos (capacidad en mAh/Wh, cargador y eficiencia) siguen disponibles
+dentro de `<details>` «Ajustes avanzados», cerrado por defecto tras añadir un
+modelo. El presupuesto de JS inicial se fija en 90 kB gzip.
+
+## 19. Búsqueda del circuito por punto más cercano
+
+**Decisión:** `public/geo/circuits-points.json` contiene ~6.855 puntos con
+`lat`, `lng`, `circuitId`, `circuitName` y `municipality`. La app busca el más
+cercano con la fórmula de Haversine en `src/lib/circuitLookup.ts` (sin
+dependencias) y acepta el resultado solo si está a 5 km o menos. El fetch es
+perezoso: se dispara al abrir la opción del mapa o pulsar «Usar mi ubicación»,
+nunca en el arranque, y se guarda en una caché en memoria.
+
+**Motivo:** es más robusto y barato que mantener polígonos por provincia: los
+puntos ya existen, funcionan en todo el país y un cálculo Haversine sobre 6.855
+entradas es instantáneo en gama baja. No se inventan geometrías.
+
+**Consecuencia:** `public/geo/circuits-index.json` sigue generándose a partir de
+`public/schedules.json` para la lista manual. Las páginas usan Leaflet solo en
+su chunk lazy. El JSON de puntos no se precachea (pesa ~800 kB); el Service
+Worker lo guarda con `CacheFirst` la primera vez que se usa, así que la segunda
+búsqueda funciona sin conexión. Si el `circuitId` encontrado no existe todavía
+en los horarios oficiales, se crea un registro local sin ventanas de luz para
+no perder la elección; se puede completar a mano.
 
 ## Futuro (no implementado)
 

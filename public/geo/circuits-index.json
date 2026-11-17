@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-09T12:00:00.000Z",
+  "source": "schedules.json",
+  "provinces": [
+    {
+      "id": "pinar-del-rio",
+      "name": "Pinar del Río",
+      "municipalities": []
+    },
+    {
+      "id": "artemisa",
+      "name": "Artemisa",
+      "municipalities": []
+    },
+    {
+      "id": "la-habana",
+      "name": "La Habana",
+      "municipalities": []
+    },
+    {
+      "id": "mayabeque",
+      "name": "Mayabeque",
+      "municipalities": []
+    },
+    {
+      "id": "matanzas",
+      "name": "Matanzas",
+      "municipalities": []
+    },
+    {
+      "id": "villa-clara",
+      "name": "Villa Clara",
+      "municipalities": []
+    },
+    {
+      "id": "cienfuegos",
+      "name": "Cienfuegos",
+      "municipalities": []
+    },
+    {
+      "id": "sancti-spiritus",
+      "name": "Sancti Spíritus",
+      "municipalities": []
+    },
+    {
+      "id": "ciego-de-avila",
+      "name": "Ciego de Ávila",
+      "municipalities": []
+    },
+    {
+      "id": "camaguey",
+      "name": "Camagüey",
+      "municipalities": []
+    },
+    {
+      "id": "las-tunas",
+      "name": "Las Tunas",
+      "municipalities": []
+    },
+    {
+      "id": "holguin",
+      "name": "Holguín",
+      "municipalities": []
+    },
+    {
+      "id": "granma",
+      "name": "Granma",
+      "municipalities": []
+    },
+    {
+      "id": "santiago-de-cuba",
+      "name": "Santiago de Cuba",
+      "municipalities": []
+    },
+    {
+      "id": "guantanamo",
+      "name": "Guantánamo",
+      "municipalities": []
+    },
+    {
+      "id": "isla-de-la-juventud",
+      "name": "Isla de la Juventud",
+      "municipalities": []
+    },
+    {
+      "id": "sin-provincia",
+      "name": "Sin provincia",
+      "municipalities": [
+        {
+          "id": "sin-municipio",
+          "name": "Sin municipio",
+          "zones": [
+            {
+              "id": "c-centro-01",
+              "name": "Centro · C-01",
+              "circuitId": "c-centro-01"
+            },
+            {
+              "id": "h-hospital-02",
+              "name": "Hospital · H-02",
+              "circuitId": "h-hospital-02"
+            },
+            {
+              "id": "n-norte-03",
+              "name": "Norte · N-03",
+              "circuitId": "n-norte-03"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

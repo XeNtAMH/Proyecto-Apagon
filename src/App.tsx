@@ -1,15 +1,34 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BottomNav } from './components/BottomNav';
 import { Icon } from './components/Icon';
 import { useHashRoute } from './hooks/useHashRoute';
 import { useOnlineStatus } from './hooks/useOnlineStatus';
 import { useOutageNotifications } from './hooks/useOutageNotifications';
 import { useTheme } from './hooks/useTheme';
-import { CircuitPage } from './pages/CircuitPage';
-import { DevicesPage } from './pages/DevicesPage';
 import { HomePage } from './pages/HomePage';
-import { SettingsPage } from './pages/SettingsPage';
 import { useAppStore } from './store/useAppStore';
+
+// Inicio se carga al arrancar; el resto, bajo demanda para cuidar el JS inicial.
+const CircuitPage = lazy(() =>
+  import('./pages/CircuitPage').then((module) => ({
+    default: module.CircuitPage,
+  })),
+);
+const DevicesPage = lazy(() =>
+  import('./pages/DevicesPage').then((module) => ({
+    default: module.DevicesPage,
+  })),
+);
+const SettingsPage = lazy(() =>
+  import('./pages/SettingsPage').then((module) => ({
+    default: module.SettingsPage,
+  })),
+);
+const MiCircuitoPage = lazy(() =>
+  import('./pages/MiCircuito').then((module) => ({
+    default: module.MiCircuitoPage,
+  })),
+);
 
 const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
 
@@ -133,10 +152,19 @@ export default function App() {
       )}
 
       <main className="main-content" id="main-content" tabIndex={-1}>
-        {route === 'home' && <HomePage />}
-        {route === 'circuit' && <CircuitPage />}
-        {route === 'devices' && <DevicesPage />}
-        {route === 'settings' && <SettingsPage />}
+        <Suspense
+          fallback={
+            <p className="route-loading" role="status">
+              Cargando…
+            </p>
+          }
+        >
+          {route === 'home' && <HomePage />}
+          {route === 'circuit' && <CircuitPage />}
+          {route === 'devices' && <DevicesPage />}
+          {route === 'settings' && <SettingsPage />}
+          {route === 'mi-circuito' && <MiCircuitoPage />}
+        </Suspense>
       </main>
 
       <BottomNav route={route} hrefFor={hrefFor} />

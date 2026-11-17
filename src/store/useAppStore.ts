@@ -48,6 +48,17 @@ interface AppStore {
   saveDevice: (device: Device) => Promise<void>;
   deleteDevice: (id: string) => Promise<void>;
   updateSettings: (patch: Partial<UserSettings>) => Promise<void>;
+  setCircuitChoice: (choice: {
+    circuitId?: string;
+    pending: boolean;
+    address?: string;
+  }) => Promise<void>;
+  /** Guarda el circuito obtenido por geolocalización. */
+  selectLocatedCircuit: (choice: {
+    circuitId: string;
+    circuitName: string;
+    municipality: string;
+  }) => Promise<void>;
   importBackup: (bundle: BackupBundle) => Promise<void>;
   createBackup: () => BackupBundle;
 }
@@ -228,7 +239,11 @@ export const useAppStore = create<AppStore>()((set, get) => ({
   },
 
   selectCircuit: async (id) => {
-    const settings = { ...get().settings, selectedCircuitId: id };
+    const settings = {
+      ...get().settings,
+      selectedCircuitId: id,
+      circuitPending: false,
+    };
     await saveSettings(settings);
     set({ settings });
   },
@@ -257,6 +272,7 @@ export const useAppStore = create<AppStore>()((set, get) => ({
     const settings = {
       ...get().settings,
       selectedCircuitId: circuit.id,
+      circuitPending: false,
     };
     await saveSettings(settings);
     set({ circuits, settings });
@@ -344,6 +360,56 @@ export const useAppStore = create<AppStore>()((set, get) => ({
     );
     await saveSettings(settings);
     set({ settings });
+  },
+
+  setCircuitChoice: async ({ circuitId, pending, address }) => {
+    const current = get().settings;
+    if (
+      circuitId &&
+      !get().circuits.some((circuit) => circuit.id === circuitId)
+    ) {
+      throw new Error('Ese circuito ya no está disponible.');
+    }
+
+    const settings = parseUserSettings(
+      {
+        ...current,
+        selectedCircuitId: circuitId ?? current.selectedCircuitId,
+        circuitPending: pending,
+        ...(address === undefined ? {} : { address }),
+      },
+      DEFAULT_USER_SETTINGS,
+    );
+    await saveSettings(settings);
+    set({ settings });
+  },
+
+  selectLocatedCircuit: async ({ circuitId, circuitName, municipality }) => {
+    let circuits = get().circuits;
+
+    // Los horarios oficiales todavía pueden no incluir este circuito. Se crea
+    // un registro local sin horario para conservar la elección entre
+    // sincronizaciones; el usuario puede completar las ventanas con luz.
+    if (!circuits.some((circuit) => circuit.id === circuitId)) {
+      const circuit: Circuit = {
+        id: circuitId,
+        name: circuitName,
+        schedule: createEmptyWeeklySchedule(),
+        source: 'user',
+        municipality,
+        updatedAt: new Date().toISOString(),
+      };
+      await putCircuit(circuit);
+      circuits = [...circuits, circuit];
+    }
+
+    const settings = {
+      ...get().settings,
+      selectedCircuitId: circuitId,
+      circuitPending: false,
+    };
+    await saveSettings(settings);
+    set({ circuits, settings });
   },
 
   importBackup: async (bundle) => {
