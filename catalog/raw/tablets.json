@@ -1,0 +1,23 @@
+[
+  {"id":"samsung-galaxy-tab-a7-lite","category":"tablet","brand":"Samsung","model":"Galaxy Tab A7 Lite","batteryWh":19.48,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"samsung-galaxy-tab-a8","category":"tablet","brand":"Samsung","model":"Galaxy Tab A8 10.5","batteryWh":26.75,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"samsung-galaxy-tab-a9","category":"tablet","brand":"Samsung","model":"Galaxy Tab A9","batteryWh":19.48,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"samsung-galaxy-tab-a9-plus","category":"tablet","brand":"Samsung","model":"Galaxy Tab A9+","batteryWh":26.75,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"samsung-galaxy-tab-s6-lite","category":"tablet","brand":"Samsung","model":"Galaxy Tab S6 Lite","batteryWh":26.34,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"samsung-galaxy-tab-s7-fe","category":"tablet","brand":"Samsung","model":"Galaxy Tab S7 FE","batteryWh":38.7,"chargeWatts":45,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"samsung-galaxy-tab-s9-fe","category":"tablet","brand":"Samsung","model":"Galaxy Tab S9 FE","batteryWh":30.44,"chargeWatts":45,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"xiaomi-redmi-pad","category":"tablet","brand":"Xiaomi","model":"Redmi Pad","batteryWh":30.34,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"xiaomi-redmi-pad-se","category":"tablet","brand":"Xiaomi","model":"Redmi Pad SE","batteryWh":30.34,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"xiaomi-pad-6","category":"tablet","brand":"Xiaomi","model":"Pad 6","batteryWh":33.87,"chargeWatts":33,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"huawei-matepad-t8","category":"tablet","brand":"Huawei","model":"MatePad T8","batteryWh":19.48,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"huawei-matepad-t10","category":"tablet","brand":"Huawei","model":"MatePad T10","batteryWh":19.24,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"huawei-matepad-se","category":"tablet","brand":"Huawei","model":"MatePad SE 10.4","batteryWh":19.24,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"huawei-matepad-11","category":"tablet","brand":"Huawei","model":"MatePad 11","batteryWh":27.74,"chargeWatts":22.5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"lenovo-tab-m8","category":"tablet","brand":"Lenovo","model":"Tab M8 (3rd Gen)","batteryWh":19.24,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"lenovo-tab-m9","category":"tablet","brand":"Lenovo","model":"Tab M9","batteryWh":19.24,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"lenovo-tab-m10","category":"tablet","brand":"Lenovo","model":"Tab M10 (3rd Gen)","batteryWh":19.24,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"lenovo-tab-m10-plus","category":"tablet","brand":"Lenovo","model":"Tab M10 Plus (3rd Gen)","batteryWh":28.5,"chargeWatts":20,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"lenovo-tab-p11","category":"tablet","brand":"Lenovo","model":"Tab P11","batteryWh":28.5,"chargeWatts":20,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"amazon-fire-hd-8","category":"tablet","brand":"Amazon","model":"Fire HD 8 (2022)","batteryWh":18.13,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"amazon-fire-hd-10","category":"tablet","brand":"Amazon","model":"Fire HD 10 (2023)","batteryWh":23.68,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"}
+]

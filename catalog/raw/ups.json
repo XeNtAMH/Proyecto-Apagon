@@ -1,0 +1,18 @@
+[
+  {"id":"ups-apc-back-ups-650va","category":"ups","brand":"APC","model":"Back-UPS 650VA (84 Wh)","batteryWh":84,"chargeWatts":10,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-apc-back-ups-800va","category":"ups","brand":"APC","model":"Back-UPS 800VA (108 Wh)","batteryWh":108,"chargeWatts":12,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-apc-back-ups-1100va","category":"ups","brand":"APC","model":"Back-UPS 1100VA (168 Wh)","batteryWh":168,"chargeWatts":15,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-apc-easy-ups-650va","category":"ups","brand":"APC","model":"Easy UPS 650VA (84 Wh)","batteryWh":84,"chargeWatts":10,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-apc-easy-ups-800va","category":"ups","brand":"APC","model":"Easy UPS 800VA (108 Wh)","batteryWh":108,"chargeWatts":12,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-apc-easy-ups-1000va","category":"ups","brand":"APC","model":"Easy UPS 1000VA (144 Wh)","batteryWh":144,"chargeWatts":15,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-forza-nt-511-500va","category":"ups","brand":"Forza","model":"NT-511 500VA (84 Wh)","batteryWh":84,"chargeWatts":10,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-forza-nt-751-750va","category":"ups","brand":"Forza","model":"NT-751 750VA (108 Wh)","batteryWh":108,"chargeWatts":12,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-forza-nt-1011-1000va","category":"ups","brand":"Forza","model":"NT-1011 1000VA (144 Wh)","batteryWh":144,"chargeWatts":15,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-forza-sl-602ul-600va","category":"ups","brand":"Forza","model":"SL-602UL 600VA (84 Wh)","batteryWh":84,"chargeWatts":10,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-forza-sl-802ul-800va","category":"ups","brand":"Forza","model":"SL-802UL 800VA (108 Wh)","batteryWh":108,"chargeWatts":12,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-cdp-r-upr508-500va","category":"ups","brand":"CDP","model":"R-UPR508 500VA (84 Wh)","batteryWh":84,"chargeWatts":10,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-cdp-r-upr758-750va","category":"ups","brand":"CDP","model":"R-UPR758 750VA (108 Wh)","batteryWh":108,"chargeWatts":12,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-cdp-r-upr1008-1000va","category":"ups","brand":"CDP","model":"R-UPR1008 1000VA (144 Wh)","batteryWh":144,"chargeWatts":15,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-tripplite-omni-650va","category":"ups","brand":"Tripp Lite","model":"OMNI650LCD 650VA (84 Wh)","batteryWh":84,"chargeWatts":10,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"ups-tripplite-omni-900va","category":"ups","brand":"Tripp Lite","model":"OMNI900LCD 900VA (108 Wh)","batteryWh":108,"chargeWatts":12,"efficiency":0.8,"rechargeable":true,"source":"manual","confidence":"medium"}
+]

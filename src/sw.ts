@@ -36,13 +36,28 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-// El JSON de horarios usa SWR; el shell y las rutas no reciben precache manual.
+// Los catálogos JSON oficiales usan SWR; el shell y las rutas no reciben precache manual.
 registerRoute(
   ({ url }) =>
     url.origin === self.location.origin &&
     url.pathname.endsWith('/schedules.json'),
   new StaleWhileRevalidate({
     cacheName: 'official-schedules',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 2,
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+    ],
+  }),
+);
+
+registerRoute(
+  ({ url }) =>
+    url.origin === self.location.origin &&
+    url.pathname.endsWith('/data/devices.json'),
+  new StaleWhileRevalidate({
+    cacheName: 'device-catalog',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 2,

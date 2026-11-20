@@ -1,0 +1,15 @@
+[
+  {"id":"router-mini-ups-8800mah","category":"router","brand":"Genérico","model":"Mini UPS para router 8.800 mAh","batteryWh":32.56,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-mini-ups-10400mah","category":"router","brand":"Genérico","model":"Mini UPS para router 10.400 mAh","batteryWh":38.48,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-mini-ups-12000mah","category":"router","brand":"Genérico","model":"Mini UPS para router 12.000 mAh","batteryWh":44.4,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-mini-ups-20000mah","category":"router","brand":"Genérico","model":"Mini UPS para router 20.000 mAh","batteryWh":74,"chargeWatts":24,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-marsriva-kp1","category":"router","brand":"Marsriva","model":"KP1 Mini DC UPS 10.000 mAh","batteryWh":37,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-marsriva-kp2","category":"router","brand":"Marsriva","model":"KP2 Mini DC UPS 16.000 mAh","batteryWh":59.2,"chargeWatts":24,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-marsriva-kp3","category":"router","brand":"Marsriva","model":"KP3 Mini DC UPS 10.000 mAh","batteryWh":37,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-wgp-103","category":"router","brand":"WGP","model":"Mini UPS 103 10.400 mAh","batteryWh":38.48,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-ske-mini-ups-10400","category":"router","brand":"SKE","model":"Mini UPS 10.400 mAh","batteryWh":38.48,"chargeWatts":18,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-huawei-e5576-mifi","category":"router","brand":"Huawei","model":"E5576 MiFi","batteryWh":5.55,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-huawei-e5577-mifi","category":"router","brand":"Huawei","model":"E5577 MiFi","batteryWh":11.1,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-tp-link-m7350-mifi","category":"router","brand":"TP-Link","model":"M7350 MiFi","batteryWh":7.4,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"router-tp-link-m7200-mifi","category":"router","brand":"TP-Link","model":"M7200 MiFi","batteryWh":7.4,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"}
+]

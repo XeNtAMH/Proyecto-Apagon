@@ -1,0 +1,30 @@
+[
+  {"id":"medical-nebulizer-rechargeable","category":"medical","brand":"Genérico","model":"Nebulizador portátil recargable","batteryWh":11.1,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"medical-bp-monitor-rechargeable","category":"medical","brand":"Genérico","model":"Tensiómetro digital recargable","batteryWh":7.4,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"medical-pulse-oximeter-rechargeable","category":"medical","brand":"Genérico","model":"Oxímetro de pulso recargable","batteryWh":2.22,"chargeWatts":2,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"medical-cpap-backup-battery-90wh","category":"medical","brand":"Genérico","model":"Batería de respaldo CPAP 90 Wh","batteryWh":90,"chargeWatts":45,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"low"},
+  {"id":"medical-portable-suction-rechargeable","category":"medical","brand":"Genérico","model":"Aspirador portátil médico recargable","batteryWh":22.2,"chargeWatts":15,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"low"},
+
+  {"id":"tool-drill-battery-12v-2ah","category":"tool","brand":"Genérico","model":"Batería taladro 12V 2.0 Ah","batteryWh":24,"chargeWatts":30,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-drill-battery-18v-2ah","category":"tool","brand":"Genérico","model":"Batería taladro 18V 2.0 Ah","batteryWh":36,"chargeWatts":60,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-drill-battery-20v-2ah","category":"tool","brand":"Genérico","model":"Batería taladro 20V 2.0 Ah","batteryWh":40,"chargeWatts":60,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-drill-battery-20v-4ah","category":"tool","brand":"Genérico","model":"Batería taladro 20V 4.0 Ah","batteryWh":80,"chargeWatts":60,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-dewalt-20v-2ah","category":"tool","brand":"DeWalt","model":"Batería 20V MAX 2.0 Ah","batteryWh":40,"chargeWatts":40,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-dewalt-20v-5ah","category":"tool","brand":"DeWalt","model":"Batería 20V MAX 5.0 Ah","batteryWh":100,"chargeWatts":60,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-makita-18v-3ah","category":"tool","brand":"Makita","model":"Batería LXT 18V 3.0 Ah","batteryWh":54,"chargeWatts":45,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-makita-18v-5ah","category":"tool","brand":"Makita","model":"Batería LXT 18V 5.0 Ah","batteryWh":90,"chargeWatts":45,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-bosch-18v-2ah","category":"tool","brand":"Bosch","model":"Batería 18V 2.0 Ah","batteryWh":36,"chargeWatts":60,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-ingco-20v-2ah","category":"tool","brand":"Ingco","model":"Batería 20V 2.0 Ah","batteryWh":40,"chargeWatts":50,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"tool-total-20v-2ah","category":"tool","brand":"Total","model":"Batería 20V 2.0 Ah","batteryWh":40,"chargeWatts":50,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+
+  {"id":"other-bluetooth-speaker-1200mah","category":"other","brand":"Genérico","model":"Bocina Bluetooth portátil 1.200 mAh","batteryWh":4.44,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-bluetooth-speaker-2400mah","category":"other","brand":"Genérico","model":"Bocina Bluetooth portátil 2.400 mAh","batteryWh":8.88,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-jbl-go-3","category":"other","brand":"JBL","model":"Go 3","batteryWh":2.78,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"other-jbl-flip-6","category":"other","brand":"JBL","model":"Flip 6","batteryWh":17.76,"chargeWatts":20,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"high"},
+  {"id":"other-tws-earbuds-case-300mah","category":"other","brand":"Genérico","model":"Audífonos TWS con estuche 300 mAh","batteryWh":1.11,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-wireless-headphones-400mah","category":"other","brand":"Genérico","model":"Audífonos inalámbricos 400 mAh","batteryWh":1.48,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-ebook-reader-basic","category":"other","brand":"Genérico","model":"Lector electrónico 1.500 mAh","batteryWh":5.55,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-handheld-game-console","category":"other","brand":"Genérico","model":"Consola portátil 3.000 mAh","batteryWh":11.1,"chargeWatts":10,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-electric-shaver","category":"other","brand":"Genérico","model":"Máquina de afeitar recargable","batteryWh":2.22,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"},
+  {"id":"other-hair-trimmer","category":"other","brand":"Genérico","model":"Recortadora de pelo recargable","batteryWh":4.44,"chargeWatts":5,"efficiency":0.85,"rechargeable":true,"source":"manual","confidence":"medium"}
+]
